@@ -24,8 +24,7 @@
     .puzzle-item { display: flex; align-items: center; justify-content: space-between; background-color: #fafafa; padding: 0.5rem 1rem; border-radius: 0.75rem; box-shadow: 0 0 5px rgba(0,0,0,0.05); }
     .puzzle-info { display: flex; align-items: center; flex: 1; }
     .puzzle-answer { font-weight: 600; color: #333; }
-    .overlay-disabled, input[disabled] { pointer-events: none; opacity: 0.5; background-color: #e5e5ea; color: #6b7280; cursor: not-allowed; }
-    .btn-edit { background-color: #007aff; color: white; border-radius: 50%; width: 2rem; height: 2rem; display: inline-flex; justify-content: center; align-items: center; margin-left: 0.5rem; }
+    .btn-edit { background-color: #007aff; color: #fff; border-radius: 50%; width: 2rem; height: 2rem; display: inline-flex; justify-content: center; align-items: center; margin-left: 0.5rem; }
     .btn-arrow { background-color: #e5e5ea; border-radius: 50%; width: 2rem; height: 2rem; display: inline-flex; justify-content: center; align-items: center; margin-left: 0.25rem; }
     .btn-arrow:disabled { opacity: 0.3; cursor: not-allowed; }
     #credit-watermark { position: absolute; bottom: 1rem; right: 1.5rem; font-size: 0.7rem; color: #ccc; user-select: none; pointer-events: none; }
@@ -48,23 +47,23 @@
 
     <!-- How it works -->
     <div id="how-it-works-screen" class="hidden">
-        <h2 class="text-3xl font-semibold mb-6">Wie funktioniert's?</h2>
-        <div class="space-y-4 text-gray-700 text-lg">
-            <p>Dieses Tool hilft dir, einen digitalen Escape Room zu erstellen und zu spielen. Es gibt zwei Hauptmodi:</p>
-            <p><strong>Spielleiter-Modus:</strong> Für den Ersteller des Spiels. Du legst eine 4-stellige PIN fest, um deine Rätsel zu schützen. Dann kannst du bis zu 6 Rätsel hinzufügen. Jedes Rätsel besteht aus einem Bild, der korrekten Lösung und einem optionalen Hinweis.</p>
-            <p><strong>Escape-Modus:</strong> Für die Spieler. In diesem Modus sehen die Spieler alle Rätselbilder und müssen die Lösungen in die Textfelder eingeben. Ziel ist es, den "Escape Room zu öffnen", indem alle Lösungen korrekt eingegeben werden.</p>
-            <p class="text-sm text-gray-500 pt-4">Alle Daten (PIN, Rätsel) werden nur lokal in deinem Browser gespeichert und nicht auf einen Server hochgeladen.</p>
-        </div>
-        <button id="back-from-how-to-btn" class="btn-secondary w-full mt-8">Zurück</button>
+      <h2 class="text-3xl font-semibold mb-6">Wie funktioniert's?</h2>
+      <div class="space-y-4 text-gray-700 text-lg">
+        <p>Dieses Tool hilft dir, einen digitalen Escape Room zu erstellen und zu spielen.</p>
+        <p><strong>Spielleiter-Modus:</strong> Lege eine 4-stellige PIN fest. Danach bis zu 6 Rätsel: Bild, exakte Lösung, optional Hinweis.</p>
+        <p><strong>Escape-Modus:</strong> Spieler sehen Bilder, geben Lösungen ein. Alle korrekt ⇒ Erfolg.</p>
+        <p class="text-sm text-gray-500 pt-4">Alles wird nur lokal gespeichert.</p>
+      </div>
+      <button id="back-from-how-to-btn" class="btn-secondary w-full mt-8">Zurück</button>
     </div>
 
     <!-- PIN Setup -->
     <div id="pin-setup-screen" class="hidden">
       <h2 class="text-3xl font-semibold mb-2">Spielleiter-PIN festlegen</h2>
-      <p class="text-gray-500 mb-6 text-lg">Bitte lege eine 4-stellige PIN fest. Gut merken!</p>
+      <p class="text-gray-500 mb-6 text-lg">Bitte lege eine 4-stellige PIN fest.</p>
       <form id="pin-setup-form" class="space-y-4">
         <input type="password" id="new-pin-input" maxlength="4" class="w-full text-center text-3xl tracking-widest p-4 border border-gray-300 rounded-lg bg-white shadow-sm" placeholder="••••" inputmode="numeric" required />
-        <button type="submit" class="btn-primary w-full">PIN festlegen und starten</button>
+        <button type="submit" class="btn-primary w-full">PIN festlegen</button>
       </form>
     </div>
 
@@ -79,7 +78,7 @@
         <button type="button" id="back-to-main-from-login" class="btn-secondary w-full">Zurück</button>
       </form>
       <div class="mt-6 text-center">
-         <button id="reset-pin-btn" class="text-sm text-gray-500 hover:text-red-600 hover:underline">PIN ZURÜCKSETZEN</button>
+        <button id="reset-pin-btn" class="text-sm text-gray-500 hover:text-red-600 hover:underline">PIN ZURÜCKSETZEN</button>
       </div>
     </div>
 
@@ -91,24 +90,25 @@
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <div class="bg-gray-50 p-4 rounded-xl shadow">
-            <div class="flex justify-between items-center mb-2">
-              <h3 class="text-lg font-semibold">Spielstand</h3>
-              <button id="reset-fails-btn" class="btn-secondary text-xs px-3 py-1">Zurücksetzen</button>
-            </div>
-            <p>Aktuelle Fehlversuche: <span id="dashboard-fail-count" class="font-bold">0</span></p>
+          <div class="flex justify-between items-center mb-2">
+            <h3 class="text-lg font-semibold">Spielstand</h3>
+            <button id="reset-fails-btn" class="btn-secondary text-xs px-3 py-1">Zurücksetzen</button>
+          </div>
+          <p>Aktuelle Fehlversuche: <span id="dashboard-fail-count" class="font-bold">0</span></p>
         </div>
         <div class="bg-gray-50 p-4 rounded-xl shadow">
-            <h3 class="text-lg font-semibold mb-2">Glückwunsch-Botschaft</h3>
-            <input type="text" id="final-reward-input" class="w-full p-2 border border-gray-300 rounded-lg bg-white" placeholder="Nachricht für die Gewinner...">
+          <h3 class="text-lg font-semibold mb-2">Glückwunsch-Botschaft</h3>
+          <input type="text" id="final-reward-input" class="w-full p-2 border border-gray-300 rounded-lg bg-white" placeholder="Nachricht für die Gewinner...">
         </div>
       </div>
+
       <div class="bg-gray-50 p-6 rounded-xl mb-6 shadow">
         <h3 id="puzzle-form-title" class="text-2xl font-semibold mb-4">Neues Rätsel erstellen</h3>
         <form id="add-puzzle-form" class="space-y-4">
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">Rätsel-Foto</label>
             <input type="file" id="puzzle-image" accept="image/*" capture="environment" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-medium file:bg-gray-200 file:text-gray-700 hover:file:bg-gray-300" />
-            <img id="image-preview" src="" class="hidden mt-2" style="max-width: 100px; max-height: 100px; border-radius: 0.5rem;"/>
+            <img id="image-preview" src="" class="hidden mt-2" style="max-width: 100px; max-height: 100px; border-radius: 0.5rem;" />
           </div>
           <div>
             <label for="puzzle-solution" class="block text-sm font-medium text-gray-700 mb-1">Lösungswort oder -zahl</label>
@@ -116,7 +116,7 @@
           </div>
           <div>
             <label for="puzzle-hint" class="block text-sm font-medium text-gray-700 mb-1">Optionaler Hinweis</label>
-            <input type="text" id="puzzle-hint" class="w-full p-3 border border-gray-300 rounded-lg bg-white shadow-sm" placeholder="Kleiner Tipp für die Spieler" autocomplete="off" />
+            <input type="text" id="puzzle-hint" class="w-full p-3 border border-gray-300 rounded-lg bg-white shadow-sm" placeholder="Kleiner Tipp" autocomplete="off" />
           </div>
           <div class="flex gap-4">
             <button type="submit" id="save-puzzle-btn" class="btn-primary w-full">Rätsel speichern</button>
@@ -124,6 +124,7 @@
           </div>
         </form>
       </div>
+
       <div class="flex justify-between items-center mb-1">
         <h3 class="text-2xl font-semibold">Bestehende Rätsel</h3>
         <button id="teacher-reset-all-btn" class="btn-danger tracking-wide text-sm px-4 py-2">Alle Rätsel löschen</button>
@@ -154,7 +155,7 @@
       <p class="text-center text-lg mb-8">Fehlversuche: <span id="total-fails" class="font-semibold text-red-600">0</span></p>
       <div class="text-center"><button id="success-back-btn" class="btn-primary px-8 py-3">Zurück</button></div>
     </div>
-    
+
     <div id="credit-watermark">Erstellt von Jan-Felix Kremer</div>
   </div>
 
@@ -172,17 +173,9 @@
           <div class="pswp__counter"></div>
           <button class="pswp__button pswp__button--close" title="Schließen (Esc)"></button>
           <button class="pswp__button pswp__button--zoom" title="Zoomen"></button>
-          <div class="pswp__preloader">
-            <div class="pswp__preloader__icn">
-              <div class="pswp__preloader__cut">
-                <div class="pswp__preloader__donut"></div>
-              </div>
-            </div>
-          </div>
+          <div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div>
         </div>
-        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-          <div class="pswp__share-tooltip"></div>
-        </div>
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div>
         <button class="pswp__button pswp__button--arrow--left" title="Vorheriges (Pfeil links)"></button>
         <button class="pswp__button pswp__button--arrow--right" title="Nächstes (Pfeil rechts)"></button>
         <div class="pswp__caption"><div class="pswp__caption__center"></div></div>
@@ -194,7 +187,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
 
   <script>
-    // --- DOM-Elemente auslesen ---
+    // --- DOM-Elemente ---
     const screens = {
       initial: document.getElementById('initial-screen'),
       howItWorks: document.getElementById('how-it-works-screen'),
@@ -239,11 +232,11 @@
           cancelEditBtn = document.getElementById('cancel-edit-btn');
     const puzzleCountInfo = document.getElementById('puzzle-count-info');
 
-    // --- Helper ---
+    // --- Helper & Konstanten ---
     const genId = () => (crypto.randomUUID ? crypto.randomUUID() : 'p_' + Math.random().toString(36).slice(2));
     const MAX_PUZZLES = 6;
 
-    // --- IndexedDB für Bild-Blobs ---
+    // --- IndexedDB: Bilder (Blobs) ---
     let db;
     function openDB(){
       return new Promise((resolve, reject)=>{
@@ -274,11 +267,28 @@
         r.onerror = ()=>rej(r.error);
       });
     }
+    async function dbDeleteImage(key){
+      if(!db) await openDB();
+      return new Promise((res,rej)=>{
+        const tx = db.transaction('images','readwrite');
+        const r = tx.objectStore('images').delete(key);
+        r.onsuccess = ()=>res();
+        r.onerror = ()=>rej(r.error);
+      });
+    }
+    async function dbClearImages(){
+      if(!db) await openDB();
+      return new Promise((res,rej)=>{
+        const tx = db.transaction('images','readwrite');
+        const r = tx.objectStore('images').clear();
+        r.onsuccess = ()=>res();
+        r.onerror = ()=>rej(r.error);
+      });
+    }
     function objURLFromBlob(blob){ return URL.createObjectURL(blob); }
 
     // --- Bild-Komprimierung (HEIC→JPEG, max 1600px) ---
     async function compressToJPEG(file, maxW=1600, quality=0.7){
-      // Versuche direkt createImageBitmap (schnell und kann HEIC je nach Browser)
       const bitmap = await createImageBitmap(file).catch(()=>null);
       if(bitmap){
         const scale = bitmap.width > maxW ? maxW / bitmap.width : 1;
@@ -287,7 +297,6 @@
         const blob = await new Promise(res=> c.toBlob(res, 'image/jpeg', quality));
         return blob;
       }
-      // Fallback über FileReader + <img>
       const dataURL = await new Promise((res,rej)=>{ const fr=new FileReader(); fr.onload=()=>res(fr.result); fr.onerror=()=>rej(fr.error); fr.readAsDataURL(file); });
       const img = new Image(); img.decoding='async';
       await new Promise((res,rej)=>{ img.onload=()=>res(); img.onerror=()=>rej(new Error('Bild konnte nicht geladen werden')); img.src=dataURL; });
@@ -298,7 +307,7 @@
       return blob;
     }
 
-    // --- App-Zustand (State) ---
+    // --- State ---
     let teacherPIN = localStorage.getItem('teacherPIN') || null;
     // puzzles: [{id, imageKey, answer, hint}]
     let puzzles = JSON.parse(localStorage.getItem('puzzles') || '[]');
@@ -310,7 +319,8 @@
     let usedHints = JSON.parse(localStorage.getItem('usedHints') || '{}');
     let editingPuzzleIndex = null;
 
-    // --- Speicher-Funktionen ---
+    // --- Persistenz ---
+    const updatePuzzleCount = () => { if (puzzleCountInfo) puzzleCountInfo.textContent = `Rätsel: ${puzzles.length}/${MAX_PUZZLES}`; };
     const savePuzzles = () => { localStorage.setItem('puzzles', JSON.stringify(puzzles)); updatePuzzleCount(); };
     const saveTeacherPIN = (pin) => { localStorage.setItem('teacherPIN', pin); teacherPIN = pin; };
     const saveFailCount = () => { localStorage.setItem('failCount', failCount); dashboardFailCount.textContent = failCount; };
@@ -318,19 +328,17 @@
     const saveStudentInputs = () => localStorage.setItem('studentInputs', JSON.stringify(studentInputs));
     const saveUsedHints = () => localStorage.setItem('usedHints', JSON.stringify(usedHints));
 
-    // --- UI- und Render-Funktionen ---
+    // --- UI/Render ---
     const switchScreen = (toScreen) => { Object.values(screens).forEach(s => s.classList.add('hidden')); toScreen.classList.remove('hidden'); };
     const resetPuzzleForm = () => {
       addPuzzleForm.reset();
-      imagePreview.src = '';
-      imagePreview.classList.add('hidden');
+      imagePreview.src = ''; imagePreview.classList.add('hidden');
       editingPuzzleIndex = null;
       puzzleFormTitle.textContent = 'Neues Rätsel erstellen';
       savePuzzleBtn.textContent = 'Rätsel speichern';
       cancelEditBtn.classList.add('hidden');
       puzzleImageInput.required = true;
     };
-    const updatePuzzleCount = () => { if (puzzleCountInfo) puzzleCountInfo.textContent = `Rätsel: ${puzzles.length}/${MAX_PUZZLES}`; };
 
     async function renderTeacherPuzzles() {
       teacherPuzzleList.innerHTML = puzzles.length === 0 ? '<p class="text-gray-500 italic">Keine Rätsel vorhanden.</p>' : '';
@@ -340,7 +348,6 @@
         const div = document.createElement('div'); div.className = 'puzzle-item';
         const infoDiv = document.createElement('div'); infoDiv.className = 'puzzle-info';
 
-        // Bild holen
         const blob = await dbGetImage(puzzle.imageKey);
         const url = blob ? objURLFromBlob(blob) : '';
         const img = document.createElement('img'); img.src = url; img.alt = 'Vorschau'; img.className = 'puzzle-thumb';
@@ -348,6 +355,7 @@
 
         const answerSpan = document.createElement('span'); answerSpan.className = 'puzzle-answer'; answerSpan.textContent = puzzle.answer;
         infoDiv.appendChild(answerSpan);
+
         div.appendChild(infoDiv);
 
         const controlsDiv = document.createElement('div'); controlsDiv.className = 'flex items-center';
@@ -376,11 +384,13 @@
         controlsDiv.appendChild(editBtn);
 
         const delBtn = document.createElement('button'); delBtn.textContent = 'Löschen'; delBtn.className = 'btn-danger ml-2 text-sm px-3 py-1';
-        delBtn.onclick = () => {
+        delBtn.onclick = async () => {
           if (confirm('Rätsel wirklich löschen?')) {
             const removed = puzzles.splice(idx, 1)[0];
             delete studentInputs[removed.id]; saveStudentInputs();
             delete usedHints[removed.id]; saveUsedHints();
+            // Bild aus DB löschen
+            if (removed.imageKey) { try { await dbDeleteImage(removed.imageKey); } catch(e) { console.warn('Bildlöschung fehlgeschlagen', e); } }
             savePuzzles(); renderTeacherPuzzles();
           }
         };
@@ -428,7 +438,7 @@
       }
     }
 
-    // --- Event Listener ---
+    // --- Events ---
     showHowItWorksBtn.addEventListener('click', () => switchScreen(screens.howItWorks));
     backFromHowToBtn.addEventListener('click', () => switchScreen(screens.initial));
 
@@ -485,7 +495,7 @@
       }
 
       const file = puzzleImageInput.files[0];
-      const answer = puzzleSolutionInput.value; // exakt (nur außen trimmen beim Vergleich)
+      const answer = puzzleSolutionInput.value; // exakt, nur außen getrimmt beim Vergleich
       const hint = puzzleHintInput.value;
 
       if (!answer || (!file && editingPuzzleIndex === null)) {
@@ -529,12 +539,12 @@
     cancelEditBtn.addEventListener('click', resetPuzzleForm);
     finalRewardInput.addEventListener('input', saveFinalReward);
 
-    teacherResetAllBtn.addEventListener('click', () => {
+    teacherResetAllBtn.addEventListener('click', async () => {
       if (puzzles.length > 0 && confirm('Alle Rätsel wirklich löschen?')) {
-        puzzles = [];
-        savePuzzles();
+        puzzles = []; savePuzzles();
         studentInputs = {}; saveStudentInputs();
         usedHints = {}; saveUsedHints();
+        try { await dbClearImages(); } catch(e) { console.warn('Bildspeicher nicht vollständig geleert', e); }
         renderTeacherPuzzles();
       }
     });
@@ -547,18 +557,36 @@
       }
     });
 
-    resetPinBtn.addEventListener('click', () => {
-      if (confirm('Möchten Sie wirklich die PIN und alle gespeicherten Daten (Rätsel, Fehlversuche, Eingaben) unwiderruflich löschen?')) {
+    // Vollständiges Zurücksetzen inkl. Bilder & UI
+    resetPinBtn.addEventListener('click', async () => {
+      if (!confirm('Möchten Sie wirklich die PIN und alle gespeicherten Daten (Rätsel, Fehlversuche, Eingaben) unwiderruflich löschen?')) return;
+
+      try {
         localStorage.clear();
+        await dbClearImages();
+
         teacherPIN = null;
         puzzles = [];
         failCount = 0;
         finalReward = '';
         studentInputs = {};
         usedHints = {};
-        alert('Alle Daten wurden erfolgreich zurückgesetzt.');
+        editingPuzzleIndex = null;
+
+        if (dashboardFailCount) dashboardFailCount.textContent = '0';
+        if (failCounterEl) failCounterEl.textContent = '0';
+        if (finalRewardInput) finalRewardInput.value = '';
+        if (finalRewardDisplay) { finalRewardDisplay.textContent = ''; finalRewardDisplay.classList.add('hidden'); }
+        if (teacherPuzzleList) teacherPuzzleList.innerHTML = '';
+        if (studentPuzzleContainer) studentPuzzleContainer.innerHTML = '';
+        if (imagePreview) { imagePreview.src = ''; imagePreview.classList.add('hidden'); }
         updatePuzzleCount();
+
+        alert('Alle Daten wurden erfolgreich zurückgesetzt.');
         switchScreen(screens.initial);
+      } catch (e) {
+        console.error(e);
+        alert('Fehler beim vollständigen Zurücksetzen.');
       }
     });
 
@@ -575,7 +603,7 @@
         studentFeedback.textContent = 'Perfekt! Alle Antworten sind richtig.';
         studentFeedback.classList.remove('text-red-500'); studentFeedback.classList.add('text-green-500');
 
-        // Durchlauf beendet: Eingaben & Hint-Flags leeren (Statistik bleibt bestehen)
+        // Durchlauf beendet: Eingaben & Hinweis-Flags leeren; Statistik bleibt stehen
         studentInputs = {}; saveStudentInputs();
         usedHints = {}; saveUsedHints();
 
@@ -589,12 +617,13 @@
       }
     });
 
-    // --- Sonstige Listener & Initialisierung ---
+    // Navigation
     backToMainFromLogin.addEventListener('click', () => switchScreen(screens.initial));
     exitTeacherModeBtn.addEventListener('click', () => switchScreen(screens.initial));
     exitStudentModeBtn.addEventListener('click', () => switchScreen(screens.initial));
     successBackBtn.addEventListener('click', () => { renderStudentPuzzles(); switchScreen(screens.studentView); });
 
+    // PhotoSwipe
     function openPhotoSwipe(imageSrc) {
       const tempImage = new Image();
       tempImage.onload = function() {
@@ -605,7 +634,7 @@
       tempImage.src = imageSrc;
     }
 
-    // DB öffnen und Startbildschirm anzeigen
+    // Init
     openDB().catch(()=>console.warn('IndexedDB nicht verfügbar'));
     updatePuzzleCount();
     switchScreen(screens.initial);
